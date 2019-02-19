@@ -42,7 +42,7 @@
 SoftwareSerial TGTX(-1, GPIO0);
 SoftwareSerial TGRX(GPIO2, -1);
 
-#include "ThinkGearStreamParser.h"
+#include <ThinkGearStreamParser.h>
 ThinkGearStreamParser TGAMParser;
 
 #define MAX_BUFFER_LENGTH 24
