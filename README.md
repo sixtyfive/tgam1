@@ -21,3 +21,5 @@ Because all those projects use Arduinos, some with a cable, some with BlueTooth.
 # And how?
 
 Check out the links above, they have many pretty pictures! You may want to try getting the TGAM1 into 57.6k Baud mode with serial commands first. For me that didn't work (it seems that's easier to do with a firmware 1.7 device, but mine has 1.6) so I ended up setting transmission speed in hardware. There's also some documentation about that in the source. So read the source, Leia.
+
+As for the software, first copy `src/config_example.h` to `config.h` and make changes as you see fit. Then you'll want to install PlatformIO and then run `pio run -t upload`.
