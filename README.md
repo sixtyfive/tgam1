@@ -14,12 +14,12 @@ A number of websites and projects exist that have done so or are providing instr
 - https://hackaday.com/2009/11/07/mindflex-teardown/
 - https://www.engineersgarage.com/articles/understanding-neurosky-eeg-chip-detail-part-213
 - https://github.com/gpascualg/TGAM1-EEGReader
+  - https://www.slideshare.net/ssbhamra/eeg-pres
 - https://easychair.org/publications/open/tX4S
 - https://www.researchgate.net/publication/301531979_Wireless_EEG_Signal_Acquisition_and_Device_ControlEnter_title
 - http://pubs.sciepub.com/jcsa/3/5/1/index.html
 - http://rdmodernresearch.org/wp-content/uploads/2015/09/21.pdf
 - https://www.pantechsolutions.net/blog/wp-content/uploads/2017/10/Brain-controlled-wheel-chair-using-Labview.pdf
-- https://www.slideshare.net/ssbhamra/eeg-pres
 
 # So why?
 
