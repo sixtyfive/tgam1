@@ -22,4 +22,8 @@ Because all those projects use Arduinos, some with a cable, some with BlueTooth.
 
 Check out the links above, they have many pretty pictures! You may want to try getting the TGAM1 into 57.6k Baud mode with serial commands first. For me that didn't work (it seems that's easier to do with a firmware 1.7 device, but mine has 1.6) so I ended up setting transmission speed in hardware. There's also some documentation about that in the source. So read the source, Leia.
 
-As for the software, first copy `src/config_example.h` to `config.h` and make changes as you see fit. Then you'll want to install PlatformIO and then run `pio run -t upload`.
+As for the firmware, first copy `src/config_example.h` to `config.h` and make changes as you see fit. Then you'll want to install PlatformIO and then run `pio run -t upload`.
+
+Once the device is sending messages, `tty2csv` (requires Ruby and the _serialport_ gem; `cd script/ruby; bundle install`) can be used to write the received data to disk or `mqttplot` (requires Python 3.6 and the _matplotlib_ and _paho-mqtt_ packages; `cd script/python; pipfile install`) can be used to watch the EEG signal scroll by.
+
+![Screenshot of matplotlib-based Graph](doc/screenshot.png)
