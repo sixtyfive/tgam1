@@ -18,6 +18,7 @@ A number of websites and projects exist that have done so or are providing instr
 - http://pubs.sciepub.com/jcsa/3/5/1/index.html
 - http://rdmodernresearch.org/wp-content/uploads/2015/09/21.pdf
 - https://www.pantechsolutions.net/blog/wp-content/uploads/2017/10/Brain-controlled-wheel-chair-using-Labview.pdf
+- https://www.slideshare.net/ssbhamra/eeg-pres
 
 # So why?
 
