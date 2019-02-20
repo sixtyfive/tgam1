@@ -12,6 +12,7 @@ A number of websites and projects exist that have done so or are providing instr
 - http://www.zibri.org/2009/09/success.html
 - https://hackaday.com/2009/10/20/brain-control-for-the-arduino/
 - https://hackaday.com/2009/11/07/mindflex-teardown/
+- https://www.engineersgarage.com/articles/understanding-neurosky-eeg-chip-detail-part-213
 - https://github.com/gpascualg/TGAM1-EEGReader
 - https://easychair.org/publications/open/tX4S
 - https://www.researchgate.net/publication/301531979_Wireless_EEG_Signal_Acquisition_and_Device_ControlEnter_title
