@@ -15,12 +15,14 @@ if len(sys.argv) < 2:
     print('Usage: ./mqttplot <MQTT server address>\n')
     exit()
 
-fs = 450 # Sampling rate; according to TGAM1 datasheet, should be 500Hz
-         # Going with 450 samples per second to allow for WiFi lag, etc.
+fs = 475 # Sampling rate; according to TGAM1 datasheet, should be 500Hz
+         # Going with fewer samples per second to allow for WiFi lag, etc.
 n_fs = 0
 update_interval = 1*1000 # milliseconds
-data = [0] * fs * int(update_interval / 1000 * 2) # for holding 2 seconds of data
+n_seconds = 3 # buffer length in seconds
+data = [0] * fs * int(update_interval / 1000 * n_seconds)
 colors = [(74/255,151/255,255/255),
+          (74/255,151/255,255/255),
           (255/255,200/255,83/255),
           (29/255,188/255,0/255),
           (255/255,85/255,34/255),
@@ -31,7 +33,8 @@ max_uV = 100 # max. estimated microvolts attainable with an on-scalp EEG
 mqtt_address = sys.argv[1]
 mqtt_port = 1883
 # EEG band ranges in Hz
-eeg_bands = {'Delta': ( 0,  4),
+eeg_bands = {'Low Delta':  ( 0,  2),
+             'High Delta': ( 2,  4),
              'Theta': ( 4,  8),
              'Alpha': ( 8, 12),
              'Beta':  (12, 30),
@@ -94,7 +97,7 @@ def perform_fft():
 
 def animate(i):
     global fs, n_fs
-    if n_fs == fs:
+    if n_fs >= fs:
         perform_fft()
         # Start to accumulate new sample pair
         n_fs = 0
@@ -102,7 +105,7 @@ def animate(i):
 
 if __name__ == '__main__':
     mqtt_client = get_data()
-    fig = plt.figure(figsize=(10,8), dpi=75)
+    fig = plt.figure(figsize=(10,10), dpi=75)
     fig.canvas.mpl_connect('close_event', on_window_close)
     axes = fig.add_subplot(111) # 1 subplot in geometry 1x1
     ani = animation.FuncAnimation(fig, animate, interval=update_interval)
