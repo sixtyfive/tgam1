@@ -31,6 +31,6 @@ Check out the links above, they have many pretty pictures! You may want to try g
 
 As for the firmware, first copy `src/config_example.h` to `config.h` and make changes as you see fit. Then you'll want to install PlatformIO and then run `pio run -t upload`.
 
-Once the device is sending messages, `tty2csv` (requires Ruby and the _serialport_ gem; `cd script/ruby; bundle install`) can be used to write the received data to disk or `mqttplot` (requires Python 3.6 and the _matplotlib_ and _paho-mqtt_ packages; `cd script/python; pipfile install`) can be used to watch the EEG signal scroll by.
+Once the device is sending messages, `tty2csv` (requires Ruby and the _serialport_ gem; `cd script/ruby; bundle install`) can be used to write the received data to disk or `mqttplot` (requires Python 3.6 and the _matplotlib_ and _paho-mqtt_ packages; `cd script/python; pipfile install`) can be used to watch the EEG signal scroll by. There is another script using MATLAB, but that could use some love. PRs for all three of these very welcome, but I'll also happily accept examples / visualisation scripts / etc. for other languages.
 
 ![Screenshot of matplotlib-based Graph](doc/screenshot.png)
