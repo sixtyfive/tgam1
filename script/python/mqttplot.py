@@ -51,10 +51,13 @@ def on_message(client, userdata, msg):
     global fs, n_fs
     adc_val = int(msg.payload, 10) # signed short on ESP8266 (i.e. int16_t)
     uV = (adc_val / max_adc) * max_uV
+    
+    y_data.pop(0)
+    y_data.append(uV)
+
     if n_fs < fs:
         data.pop(0)
         data.append(uV)
-        print(uV)
         n_fs = n_fs + 1
 
 
@@ -73,7 +76,7 @@ def get_data():
 
 
 # https://dsp.stackexchange.com/questions/45345/how-to-correctly-compute-the-eeg-frequency-bands-with-python/45662#45662
-def perform_fft():
+def plot_fft():
     # perform FFT
     fft_vals = np.absolute(np.fft.rfft(data))
     fft_freq = np.fft.rfftfreq(len(data), 1.0/fs)
@@ -87,27 +90,48 @@ def perform_fft():
     df.iloc[0:0] # empty out the dataframe
     df['band'] = eeg_bands.keys()
     df['val'] = [eeg_band_fft[band] for band in eeg_bands]
-    print(df)
-    # plot data using matplotlib
-    plt.cla()
-    df.plot.bar(x='band', y='val', legend=False, color=colors, ax=axes)
-    axes.set_xlabel('EEG band')
-    axes.set_ylabel('Mean band amplitude')
+    # plot
+    axes1.cla()
+    df.plot.bar(x='band', y='val', legend=False, color=colors, ax=axes1)
+    axes1.set_title('EEG Power Bands')
+    axes1.set_xlabel('frequency band')
+    axes1.set_ylabel('FFT magnitude')
+
+
+def plot_raw():
+    axes2.cla()
+    axes2.set_title('EEG Signal Over Time')
+    axes2.set_xlabel('ms')
+    axes2.set_ylabel('µV')
+    axes2.set_xlim([0,fs])
+    axes2.set_ylim([-(max_uV+10),(max_uV+10)])
+    axes2.plot(x_data, y_data)
 
 
 def animate(i):
     global fs, n_fs
     if n_fs >= fs:
-        perform_fft()
+        plot_fft()
         # Start to accumulate new sample pair
         n_fs = 0
+    plot_raw()
 
 
 if __name__ == '__main__':
+    
+    x_data = np.linspace(0, fs, fs)
+    y_data = [0] * fs
+    
     mqtt_client = get_data()
-    fig = plt.figure(figsize=(10,10), dpi=75)
+    
+    fig = plt.figure(figsize=(20,10), dpi=75)
     fig.canvas.mpl_connect('close_event', on_window_close)
-    axes = fig.add_subplot(111) # 1 subplot in geometry 1x1
-    ani = animation.FuncAnimation(fig, animate, interval=update_interval)
+    fig.canvas.set_window_title('TGAM1 MQTT Plot')
+
+    axes1 = fig.add_subplot(121) # power bands
+    axes2 = fig.add_subplot(122) # raw data
+    
+    ani = animation.FuncAnimation(fig, animate, interval=update_interval)    
     print('Streaming data... ', end='', flush=True)
+    
     plt.show()
